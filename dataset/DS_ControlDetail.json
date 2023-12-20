@@ -1,0 +1,163 @@
+{
+	"name": "DS_ControlDetail",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ControlDetail",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sourcename",
+				"type": "varchar"
+			},
+			{
+				"name": "sourcetype",
+				"type": "varchar"
+			},
+			{
+				"name": "sourcedescription",
+				"type": "varchar"
+			},
+			{
+				"name": "sourceid",
+				"type": "varchar"
+			},
+			{
+				"name": "sourceschema",
+				"type": "varchar"
+			},
+			{
+				"name": "sourceobject",
+				"type": "varchar"
+			},
+			{
+				"name": "dataflowflag",
+				"type": "varchar"
+			},
+			{
+				"name": "isreadyforexecution",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "loadtype",
+				"type": "varchar"
+			},
+			{
+				"name": "loadfrequency",
+				"type": "varchar"
+			},
+			{
+				"name": "flowstatus",
+				"type": "varchar"
+			},
+			{
+				"name": "targetname",
+				"type": "varchar"
+			},
+			{
+				"name": "targetschemaname",
+				"type": "varchar"
+			},
+			{
+				"name": "targetobject",
+				"type": "varchar"
+			},
+			{
+				"name": "targetprocedurename",
+				"type": "varchar"
+			},
+			{
+				"name": "jobname",
+				"type": "varchar"
+			},
+			{
+				"name": "createddate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "lastupdateddate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "createduser",
+				"type": "varchar"
+			},
+			{
+				"name": "isapplicable",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "profilename",
+				"type": "varchar"
+			},
+			{
+				"name": "emailto",
+				"type": "varchar"
+			},
+			{
+				"name": "archcondition",
+				"type": "varchar"
+			},
+			{
+				"name": "isdecomreq",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "archintvlcond",
+				"type": "varchar"
+			},
+			{
+				"name": "sourcequery",
+				"type": "varchar"
+			},
+			{
+				"name": "sourcecallingseq",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "etllastrundate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "latestbatchid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "executiontype",
+				"type": "varchar"
+			},
+			{
+				"name": "intervaldays",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "remarks",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "ODS",
+			"table": "controldetail"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

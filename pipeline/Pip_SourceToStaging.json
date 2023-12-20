@@ -1,0 +1,422 @@
+{
+	"name": "Pip_SourceToStaging",
+	"properties": {
+		"activities": [
+			{
+				"name": "Control Table",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select * from ods.controldetail (NOLOCK) where isreadyforexecution = 1 and isapplicable = 1",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_ControlDetail",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach Container",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Control Table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Control Table').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Pre Process",
+							"description": "Preprocess run in DWH.",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "@concat('DECLARE @batchid int;',\r\n'EXEC ods.usp_etlpreprocess ',item().sourceid,',',item().targetobject,',',item().dataflowflag,',','@batchid OUTPUT;',\r\n'SELECT @batchid AS batchid')",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "DS_DWH",
+									"type": "DatasetReference",
+									"parameters": {
+										"targetschemaname": {
+											"value": "NULL",
+											"type": "Expression"
+										},
+										"targetobjectname": {
+											"value": "NULL",
+											"type": "Expression"
+										}
+									}
+								},
+								"firstRowOnly": false
+							}
+						},
+						{
+							"name": "SourceToStaging",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Pre Process",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"sqlReaderQuery": {
+										"value": "@if(equals(item().loadtype, 'Incremental'), concat(item().sourcequery,' ', item().operator, ' ', 'cast (','''', item().etllastrundate, '''',' as date)'), item().sourcequery)",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": true,
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_Source",
+									"type": "DatasetReference",
+									"parameters": {
+										"sourceschema": {
+											"value": "@item().sourceschema",
+											"type": "Expression"
+										},
+										"sourceobject": {
+											"value": "@item().sourceobject",
+											"type": "Expression"
+										},
+										"sourcequery": {
+											"value": "@item().sourcequery",
+											"type": "Expression"
+										},
+										"etllastrundate": {
+											"value": "@item().etllastrundate",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_DWH",
+									"type": "DatasetReference",
+									"parameters": {
+										"targetschemaname": {
+											"value": "@item().targetschemaname",
+											"type": "Expression"
+										},
+										"targetobjectname": {
+											"value": "@item().targetobject",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Error Log",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "SourceToStaging",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[ODS].[usp_etlerrorinsert]",
+								"storedProcedureParameters": {
+									"p_batchid": {
+										"value": {
+											"value": "@activity('Pre Process').output.firstRow.batchid",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"p_dataflowflag": {
+										"value": {
+											"value": "@item().dataflowflag",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"p_errordesc": {
+										"value": {
+											"value": "@activity('SourceToStaging').output.errors[0].Message",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"p_errorid": {
+										"value": {
+											"value": "@activity('SourceToStaging').output.errors[0].Code",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"p_errorline": {
+										"value": null,
+										"type": "Int32"
+									},
+									"p_packagename": {
+										"value": {
+											"value": "@item().targetprocedurename",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"p_sourceid": {
+										"value": {
+											"value": "@item().sourceid",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"p_targetobject": {
+										"value": {
+											"value": "@item().targetobject",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"p_taskname": {
+										"value": {
+											"value": "@item().jobname",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "LS_ControlDetail",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Post Process success",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "SourceToStaging",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[ODS].[usp_etlpostprocess]",
+								"storedProcedureParameters": {
+									"pbatchid": {
+										"value": {
+											"value": "@activity('Pre Process').output.firstRow.batchid",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"pdataflowflag": {
+										"value": {
+											"value": "@item().dataflowflag",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"pinsertcount": {
+										"value": {
+											"value": "@activity('SourceToStaging').output.rowsCopied",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"psourcecount": {
+										"value": {
+											"value": "@activity('SourceToStaging').output.rowsRead",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"psourceid": {
+										"value": {
+											"value": "@item().sourceid",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"ptargetobject": {
+										"value": {
+											"value": "@item().targetobject",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"pupdatecount": {
+										"value": null,
+										"type": "Int32"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "LS_ControlDetail",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Post Process on failure",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Error Log",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[ODS].[usp_etlpostprocess]",
+								"storedProcedureParameters": {
+									"pbatchid": {
+										"value": {
+											"value": "@activity('Pre Process').output.firstRow.batchid",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"pdataflowflag": {
+										"value": {
+											"value": "@item().dataflowflag",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"pinsertcount": {
+										"value": {
+											"value": "@activity('SourceToStaging').output.rowsCopied",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"psourcecount": {
+										"value": {
+											"value": "@activity('SourceToStaging').output.rowsRead",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"psourceid": {
+										"value": {
+											"value": "@item().sourceid",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"ptargetobject": {
+										"value": {
+											"value": "@item().targetobject",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"pupdatecount": {
+										"value": null,
+										"type": "Int32"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "LS_ControlDetail",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-12-19T06:22:53Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

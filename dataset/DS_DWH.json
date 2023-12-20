@@ -1,0 +1,31 @@
+{
+	"name": "DS_DWH",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ControlDetail",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"targetschemaname": {
+				"type": "string"
+			},
+			"targetobjectname": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().targetschemaname",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().targetobjectname",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
