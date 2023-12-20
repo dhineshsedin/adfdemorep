@@ -1,0 +1,6 @@
+{
+	"name": "SSSMStoAzSql",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

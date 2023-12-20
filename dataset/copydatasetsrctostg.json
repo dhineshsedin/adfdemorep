@@ -1,0 +1,27 @@
+{
+	"name": "copydatasetsrctostg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SSMStoASQL",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sourcename": {
+				"type": "string"
+			},
+			"sourceobject": {
+				"type": "string"
+			},
+			"etllastrundate": {
+				"type": "string"
+			},
+			"sourcequery": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

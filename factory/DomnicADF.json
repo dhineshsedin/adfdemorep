@@ -1,0 +1,9 @@
+{
+	"name": "DomnicADF",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "506a453e-d28c-426e-b185-9fe4da083aca",
+		"tenantId": "d2624b5b-89fd-468e-b504-6570779aa3b6"
+	}
+}

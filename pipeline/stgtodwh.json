@@ -1,0 +1,279 @@
+{
+	"name": "stgtodwh",
+	"properties": {
+		"activities": [
+			{
+				"name": "stglkup",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "select * \nfrom ods.controldetail \nwhere isreadyforexecution = 0\nand dataflowflag ='StgtoDW'\nand sourceid = 'SalesOrderHeader'",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "contrldtldataset",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "stglkup",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('stglkup').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Lookup1",
+							"type": "Lookup",
+							"dependsOn": [
+								{
+									"activity": "srclookup",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"sqlReaderQuery": {
+										"value": "@concat('DECLARE @sourcecount int,@insertcount int,@updatecount int;','EXEC ',item().targetschemaname,'.',item().targetprocedurename,' ',item().sourceid,',',item().targetobject,',',item().dataflowflag,',','@sourcecount OUTPUT,@insertcount OUTPUT,@updatecount OUTPUT;','SELECT @sourcecount as sourcecount,@insertcount as insertcount,@updatecount  as updatecount')",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "cntrldtlpreprodataset",
+									"type": "DatasetReference"
+								}
+							}
+						},
+						{
+							"name": "srclookup",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"sqlReaderQuery": {
+										"value": "@concat('DECLARE @batchid int;',\n'EXEC ods.usp_etlpreprocess ',item().sourceid,',',item().targetobject,',',item().dataflowflag,',','@batchid OUTPUT;',\n'SELECT @batchid AS batchid')",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "cntrldtlpreprodataset",
+									"type": "DatasetReference"
+								},
+								"firstRowOnly": true
+							}
+						},
+						{
+							"name": "postprocesssp",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Lookup1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "ods.usp_etlpostprocess",
+								"storedProcedureParameters": {
+									"pbatchid": {
+										"value": {
+											"value": "@activity('srclookup').output.firstRow.batchid",
+											"type": "Expression"
+										},
+										"type": "Int64"
+									},
+									"ptargetobject": {
+										"value": {
+											"value": "@item().targetobject",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"pdataflowflag": {
+										"value": {
+											"value": "@item().dataflowflag",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"psourceid": {
+										"value": {
+											"value": "@item().sourceid",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"pinsertcount": {
+										"value": {
+											"value": "@activity('Lookup1').output.firstRow.insertcount",
+											"type": "Expression"
+										},
+										"type": "Int64"
+									},
+									"psourcecount": {
+										"value": {
+											"value": "@activity('Lookup1').output.firstRow.sourcecount",
+											"type": "Expression"
+										},
+										"type": "Int64"
+									},
+									"pupdatecount": {
+										"value": null,
+										"type": "Int64"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "preprocesssplink",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "Stored procedure2",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Lookup1",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "ods.usp_etlerrorinsert",
+								"storedProcedureParameters": {
+									"p_sourceid": {
+										"value": {
+											"value": "@item().sourceid",
+											"type": "Expression"
+										},
+										"type": "Int16"
+									},
+									"p_targetobject": {
+										"value": {
+											"value": "@item().targetobject",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"p_dataflowflag": {
+										"value": {
+											"value": "@item().dataflowflag",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"p_batchid": {
+										"value": {
+											"value": "@activity('Lookup1').output.firstRow.batchid",
+											"type": "Expression"
+										},
+										"type": "Int16"
+									},
+									"p_taskname": {
+										"value": null,
+										"type": "String"
+									},
+									"p_packagename": {
+										"value": null,
+										"type": "String"
+									},
+									"p_errorid": {
+										"value": {
+											"value": "@activity('Lookup1').output.errorid",
+											"type": "Expression"
+										},
+										"type": "Int16"
+									},
+									"p_errordesc": {
+										"value": {
+											"value": "@activity('Lookup1').output.errordesc",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"p_errorline": {
+										"value": null,
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "preprocesssplink",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-12-20T04:54:17Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

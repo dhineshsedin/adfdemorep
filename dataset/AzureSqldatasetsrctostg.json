@@ -1,0 +1,25 @@
+{
+	"name": "AzureSqldatasetsrctostg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqllnksersrctostg",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"targetobject": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "stg",
+			"table": {
+				"value": "@dataset().targetobject",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
