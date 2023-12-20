@@ -1,0 +1,31 @@
+{
+	"name": "ds_prodpurchase_Sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlazure_demo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "customercode",
+				"type": "varchar"
+			},
+			{
+				"name": "customername",
+				"type": "varchar"
+			},
+			{
+				"name": "productpurchases",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "customerpurchases"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

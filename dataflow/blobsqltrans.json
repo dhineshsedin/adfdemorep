@@ -1,0 +1,112 @@
+{
+	"name": "blobsqltrans",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_purchase_oltp_blob",
+						"type": "DatasetReference"
+					},
+					"name": "purchaseorder"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_customer_oltp_blob",
+						"type": "DatasetReference"
+					},
+					"name": "customerorder"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_prodpurchase_Sql",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "purchaseselected"
+				},
+				{
+					"name": "customerselected"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          PurchaseOrderID as string,",
+				"          CustomerCode as string,",
+				"          ProductCode as string,",
+				"          EmployeeCode as string,",
+				"          PurchaseOrderDate as string,",
+				"          Quantity as integer,",
+				"          UnitPrice as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> purchaseorder",
+				"source(output(",
+				"          Customercode as string,",
+				"          customername as string,",
+				"          address as string,",
+				"          phoneno as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> customerorder",
+				"purchaseorder select(mapColumn(",
+				"          CustomerCode,",
+				"          Quantity",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> purchaseselected",
+				"customerorder select(mapColumn(",
+				"          Customercode,",
+				"          customername",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> customerselected",
+				"purchaseselected, customerselected join(purchaseselected@CustomerCode == customerselected@Customercode,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 aggregate(groupBy(purchaseselected@CustomerCode,",
+				"          customername),",
+				"     Totalprodpurchases = sum(Quantity)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          customercode as string,",
+				"          customername as string,",
+				"          productpurchases as long",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          customercode = CustomerCode,",
+				"          customername,",
+				"          productpurchases = Totalprodpurchases",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}

@@ -1,0 +1,27 @@
+{
+	"name": "ds_bloboutput_dk",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blobstorage_demo",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Foldername": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "@dataset().Foldername",
+					"type": "Expression"
+				},
+				"container": "adfdkdemo"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
