@@ -1050,7 +1050,7 @@
 									}
 								},
 								{
-									"name": "Post Process on failure",
+									"name": "Post Process failure",
 									"type": "SqlServerStoredProcedure",
 									"dependsOn": [
 										{
