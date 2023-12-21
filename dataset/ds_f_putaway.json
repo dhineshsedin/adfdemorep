@@ -1,0 +1,222 @@
+{
+	"name": "ds_f_putaway",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ControlDetail",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "pway_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "pway_itm_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "pway_exe_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "grn_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "pway_loc_code",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_pln_no",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_stag_id",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_mhe_id",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_employee_id",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_po_no",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_item",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_zone",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_allocated_bin",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_gr_no",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_su_type",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_su",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_from_staging_id",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_stock_status",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_exec_no",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_exec_ou",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pway_exec_status",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_exec_start_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "pway_exec_end_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "pway_created_by",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_created_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "pway_gen_from",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_exec_lineno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pway_po_sr_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pway_uid",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_rqs_conformation",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pway_actual_bin",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_actual_bin_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "pway_reason",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_item_ln_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pway_bin",
+				"type": "varchar"
+			},
+			{
+				"name": "pway_occu_capacity",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "created_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "modified_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "etlcreatedatetime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "etlupdatedatetime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "activeindicator",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pway_pln_itm_dtl_itm_hdr_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "pway_asn_date",
+				"type": "date"
+			},
+			{
+				"name": "sourcename",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "DWH",
+			"table": "f_putaway"
+		}
+	}
+}
