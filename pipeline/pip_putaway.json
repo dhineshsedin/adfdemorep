@@ -61,15 +61,59 @@
 							"typeProperties": {
 								"source": {
 									"type": "SqlServerSource",
+									"sqlReaderQuery": {
+										"value": "Select top 100 * from @{item().sourceobject}",
+										"type": "Expression"
+									},
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": true,
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
 									"referenceName": "DS_SourcePutaway",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"sourceschema": {
+											"value": "@item().sourceschema",
+											"type": "Expression"
+										},
+										"sourceobject": {
+											"value": "@item().sourceobject",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_dwh",
+									"type": "DatasetReference",
+									"parameters": {
+										"targetschemaname": {
+											"value": "@item().targetschemaname",
+											"type": "Expression"
+										},
+										"targetobject": {
+											"value": "@item().targetobject",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
