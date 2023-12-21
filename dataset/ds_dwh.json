@@ -2,7 +2,7 @@
 	"name": "ds_dwh",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_sqlazure_demo",
+			"referenceName": "LS_ControlDetail",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
