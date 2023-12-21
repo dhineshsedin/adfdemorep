@@ -62,7 +62,7 @@
 								"source": {
 									"type": "SqlServerSource",
 									"sqlReaderQuery": {
-										"value": "Select top 100 * from @{item().sourceobject}",
+										"value": "Select * from @{item().sourceobject}",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
