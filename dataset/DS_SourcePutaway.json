@@ -1,0 +1,30 @@
+{
+	"name": "DS_SourcePutaway",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sourceschema": {
+				"type": "string"
+			},
+			"sourceobject": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().sourceschema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().sourceobject",
+				"type": "Expression"
+			}
+		}
+	}
+}
