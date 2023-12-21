@@ -62,7 +62,7 @@
 								"source": {
 									"type": "SqlServerSource",
 									"sqlReaderQuery": {
-										"value": "Select top 100 * from aaa_wms_put_exec_item_dtl_30nov",
+										"value": "Select top 100 * from @{item().sourceobject}",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
