@@ -1,0 +1,115 @@
+{
+	"name": "df_Putaway",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_stg_wms_put_exec_item_dtl",
+						"type": "DatasetReference"
+					},
+					"name": "WmsPutExecItemDTL"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_stg_wms_putaway_exec_dtl",
+						"type": "DatasetReference"
+					},
+					"name": "wmsPutawayExecDTL"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "PutawayItmGrn"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          wms_pway_loc_code as string,",
+				"          wms_pway_exec_no as string,",
+				"          wms_pway_exec_ou as integer,",
+				"          wms_pway_exec_lineno as integer,",
+				"          wms_pway_po_no as string,",
+				"          wms_pway_po_sr_no as integer,",
+				"          wms_pway_uid as string,",
+				"          wms_pway_item as string,",
+				"          wms_pway_zone as string,",
+				"          wms_pway_rqs_conformation as integer,",
+				"          wms_pway_allocated_qty as decimal(28,8),",
+				"          wms_pway_allocated_bin as string,",
+				"          wms_pway_actual_bin as string,",
+				"          wms_pway_actual_bin_qty as decimal(28,8),",
+				"          wms_pway_gr_no as string,",
+				"          wms_pway_gr_lineno as integer,",
+				"          wms_pway_gr_lot_no as string,",
+				"          wms_pway_su_type as string,",
+				"          wms_pway_su_serial_no as string,",
+				"          wms_pway_su as string,",
+				"          wms_pway_from_staging_id as string,",
+				"          wms_pway_reason as string,",
+				"          wms_pway_supp_batch_no as string,",
+				"          wms_pway_thu_serial_no as string,",
+				"          wms_pway_target_thu_id as string,",
+				"          wms_pway_cross_dock as integer,",
+				"          wms_pway_actual_staging as string,",
+				"          wms_pway_allocated_staging as string,",
+				"          wms_pway_target_thu_serial_no as string,",
+				"          wms_pway_stock_status as string,",
+				"          wms_pway_staging as string,",
+				"          wms_pway_su2 as string,",
+				"          wms_pway_su_serial_no2 as string,",
+				"          wms_put_su1_conv_flg as string,",
+				"          wms_put_su2_conv_flg as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> WmsPutExecItemDTL",
+				"source(output(",
+				"          wms_pway_loc_code as string,",
+				"          wms_pway_exec_no as string,",
+				"          wms_pway_exec_ou as integer,",
+				"          wms_pway_pln_no as string,",
+				"          wms_pway_pln_ou as integer,",
+				"          wms_pway_exec_status as string,",
+				"          wms_pway_stag_id as string,",
+				"          wms_pway_mhe_id as string,",
+				"          wms_pway_employee_id as string,",
+				"          wms_pway_exec_start_date as timestamp,",
+				"          wms_pway_exec_end_date as timestamp,",
+				"          wms_pway_completed as integer,",
+				"          wms_pway_created_by as string,",
+				"          wms_pway_created_date as timestamp,",
+				"          wms_pway_modified_by as string,",
+				"          wms_pway_modified_date as timestamp,",
+				"          wms_pway_timestamp as integer,",
+				"          wms_pway_userdefined1 as string,",
+				"          wms_pway_userdefined2 as string,",
+				"          wms_pway_userdefined3 as string,",
+				"          wms_pway_billing_status as string,",
+				"          wms_pway_bill_value as decimal(28,8),",
+				"          wms_pway_hdlpway_bil_status as string,",
+				"          wms_pway_lbchprhr_bil_status as string,",
+				"          wms_pway_pwaytchr_bil_status as string,",
+				"          wms_pway_hdlchcar_bil_status as string,",
+				"          wms_pway_type as string,",
+				"          wms_pway_by_flag as string,",
+				"          wms_pway_gen_from as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> wmsPutawayExecDTL",
+				"WmsPutExecItemDTL, wmsPutawayExecDTL join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> PutawayItmGrn"
+			]
+		}
+	}
+}
