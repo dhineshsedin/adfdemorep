@@ -1,0 +1,6 @@
+{
+	"name": "IntRunSQLSERVER",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
