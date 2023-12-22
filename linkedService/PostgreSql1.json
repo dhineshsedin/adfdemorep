@@ -10,6 +10,11 @@
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime2",
+=======
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5ODYzNmE4NS03OGJhLTRjMmMtOGUzNi0wYzgwYmYwN2MwZGUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntimeselfhosted",
 			"type": "IntegrationRuntimeReference"
 		}
 	}

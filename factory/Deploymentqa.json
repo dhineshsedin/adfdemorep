@@ -1,0 +1,9 @@
+{
+	"name": "Deploymentqa",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "085d31ed-56f0-4583-aaca-1f959ac6ad6b",
+		"tenantId": "d2624b5b-89fd-468e-b504-6570779aa3b6"
+	}
+}

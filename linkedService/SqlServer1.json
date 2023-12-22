@@ -5,12 +5,12 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=True;data source=RFl224;initial catalog=ADF",
-			"userName": "RFL224\\Gokul",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjZTNlZDRlNi00ZmFkLTQyODktYTQ5Mi0yYTYzYzhkZTk4MDYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=True;data source=RFL240;initial catalog=AdventureWorks2012",
+			"userName": "RFL240\\Dhinesh kumar B",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlZjNlYzFlNS0zZGFhLTQzODktOTBlNi00MDEzZTlmZGVhNjEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "integrationRuntime2",
+			"referenceName": "integrationRuntimeselfhosted",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
