@@ -1,5 +1,5 @@
 {
-	"name": "ds_Asndetail",
+	"name": "ds_Asndet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sqlazure_demo",

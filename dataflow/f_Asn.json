@@ -13,7 +13,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_Asndetail",
+						"referenceName": "ds_Asndet",
 						"type": "DatasetReference"
 					},
 					"name": "asndetail"
