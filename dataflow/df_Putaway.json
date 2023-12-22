@@ -44,6 +44,9 @@
 				},
 				{
 					"name": "SelectColumns"
+				},
+				{
+					"name": "derivedColumn"
 				}
 			],
 			"scriptLines": [
@@ -226,7 +229,12 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectColumns",
-				"SelectColumns sink(allowSchemaDrift: true,",
+				"SelectColumns derive(pway_itm_dtl_key = coalesce(pway_itm_dtl_key,-1),",
+				"          pway_exe_dtl_key = coalesce(pway_exe_dtl_key,-1),",
+				"          pway_pln_itm_dtl_itm_hdr_key = coalesce(pway_pln_itm_dtl_itm_hdr_key,-1),",
+				"          grn_key = coalesce(grn_key,-1),",
+				"          etlcreatedatetime = currentDate()) ~> derivedColumn",
+				"derivedColumn sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          pway_key as long,",
