@@ -1,0 +1,220 @@
+{
+	"name": "DS_GRN",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ControlDetail",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "grn_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_itm_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_loc_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_emp_hdr_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_itm_dtl_itm_hdr_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_itm_dtl_uom_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_itm_dtl_stg_mas_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_loc_code",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_po_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_asn_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_asn_date",
+				"type": "date"
+			},
+			{
+				"name": "gr_ref_type",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_item",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_item_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "gr_lot_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_acpt_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "gr_rej_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "gr_storage_unit",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_mas_uom",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_su_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "gr_itmexecution_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "gr_reasoncode",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_cross_dock",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_stock_status",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_exec_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_lineno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gr_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_emp",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_start_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "gr_end_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "gr_exec_status",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_created_by",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_exec_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "gr_gen_from",
+				"type": "varchar"
+			},
+			{
+				"name": "gr_created_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "gr_modified_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "etlcreatedatetime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "etlupdatedatetime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "activeindicator",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sourcename",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "stg",
+			"table": "stg_grn"
+		}
+	}
+}

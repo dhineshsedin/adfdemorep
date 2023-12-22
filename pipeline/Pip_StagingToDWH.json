@@ -69,10 +69,14 @@
 									"partitionOption": "None"
 								},
 								"dataset": {
-									"referenceName": "ds_dwh",
+									"referenceName": "DS_DWH",
 									"type": "DatasetReference",
 									"parameters": {
 										"targetschemaname": {
+											"value": "NULL",
+											"type": "Expression"
+										},
+										"targetobjectname": {
 											"value": "NULL",
 											"type": "Expression"
 										}
@@ -110,10 +114,14 @@
 									"partitionOption": "None"
 								},
 								"dataset": {
-									"referenceName": "ds_dwh",
+									"referenceName": "DS_DWH",
 									"type": "DatasetReference",
 									"parameters": {
 										"targetschemaname": {
+											"value": "null",
+											"type": "Expression"
+										},
+										"targetobjectname": {
 											"value": "null",
 											"type": "Expression"
 										}

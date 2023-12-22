@@ -1,9 +1,9 @@
 {
-	"name": "dataflowpipeline",
+	"name": "Dataflowact",
 	"properties": {
 		"activities": [
 			{
-				"name": "Dataflowempdep",
+				"name": "Data flow1",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -15,6 +15,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow1",
+						"type": "DataFlowReference"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
@@ -24,7 +28,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2023-12-15T12:29:04Z"
+		"lastPublishTime": "2023-12-22T12:12:00Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

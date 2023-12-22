@@ -76,8 +76,7 @@
 										"targetschemaname": {
 											"value": "NULL",
 											"type": "Expression"
-										},
-										"targetobject": "Null"
+										}
 									}
 								},
 								"firstRowOnly": false

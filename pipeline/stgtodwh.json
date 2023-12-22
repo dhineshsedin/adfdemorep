@@ -1,9 +1,9 @@
 {
-	"name": "SSMStoAZSQLsrcetosg",
+	"name": "stgtodwh",
 	"properties": {
 		"activities": [
 			{
-				"name": "Overalllookup",
+				"name": "stglkup",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select * \nfrom ods.controldetail \nwhere isreadyforexecution = 1\nand dataflowflag = 'SRCtoStg'",
+						"sqlReaderQuery": "select * \nfrom ods.controldetail \nwhere isreadyforexecution = 0\nand dataflowflag ='StgtoDW'\nand sourceid = 'SalesOrderHeader'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -33,7 +33,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Overalllookup",
+						"activity": "stglkup",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -42,14 +42,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Overalllookup').output.value",
+						"value": "@activity('stglkup').output.value",
 						"type": "Expression"
 					},
-					"isSequential": false,
 					"activities": [
 						{
-							"name": "copysrctostg",
-							"type": "Copy",
+							"name": "Lookup1",
+							"type": "Lookup",
 							"dependsOn": [
 								{
 									"activity": "srclookup",
@@ -70,65 +69,17 @@
 								"source": {
 									"type": "SqlServerSource",
 									"sqlReaderQuery": {
-										"value": "@if(equals(item().loadtype, 'Incremental'), concat(item().sourcequery,' ', item().operator, ' ', 'cast (','''', item().etllastrundate, '''',' as date)'), item().sourcequery)",
+										"value": "@concat('DECLARE @sourcecount int,@insertcount int,@updatecount int;','EXEC ',item().targetschemaname,'.',item().targetprocedurename,' ',item().sourceid,',',item().targetobject,',',item().dataflowflag,',','@sourcecount OUTPUT,@insertcount OUTPUT,@updatecount OUTPUT;','SELECT @sourcecount as sourcecount,@insertcount as insertcount,@updatecount  as updatecount')",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
-								"sink": {
-									"type": "AzureSqlSink",
-									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": true,
-									"tableOption": "autoCreate",
-									"disableMetricsCollection": false
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
+								"dataset": {
+									"referenceName": "cntrldtlpreprodataset",
+									"type": "DatasetReference"
 								}
-							},
-							"inputs": [
-								{
-									"referenceName": "copydatasetsrctostg",
-									"type": "DatasetReference",
-									"parameters": {
-										"sourcename": {
-											"value": "@item().sourcename",
-											"type": "Expression"
-										},
-										"sourceobject": {
-											"value": "@item().sourceid",
-											"type": "Expression"
-										},
-										"etllastrundate": {
-											"value": "@item().etllastrundate",
-											"type": "Expression"
-										},
-										"sourcequery": {
-											"value": "@item().sourcequery",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "AzureSqldatasetsrctostg",
-									"type": "DatasetReference",
-									"parameters": {
-										"targetobject": {
-											"value": "@item().targetobject",
-											"type": "Expression"
-										}
-									}
-								}
-							]
+							}
 						},
 						{
 							"name": "srclookup",
@@ -164,7 +115,7 @@
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
-									"activity": "copysrctostg",
+									"activity": "Lookup1",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -211,14 +162,14 @@
 									},
 									"pinsertcount": {
 										"value": {
-											"value": "@activity('copysrctostg').output.rowsCopied",
+											"value": "@activity('Lookup1').output.firstRow.insertcount",
 											"type": "Expression"
 										},
 										"type": "Int64"
 									},
 									"psourcecount": {
 										"value": {
-											"value": "@activity('copysrctostg').output.rowsRead",
+											"value": "@activity('Lookup1').output.firstRow.sourcecount",
 											"type": "Expression"
 										},
 										"type": "Int64"
@@ -239,7 +190,7 @@
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
-									"activity": "copysrctostg",
+									"activity": "Lookup1",
 									"dependencyConditions": [
 										"Failed"
 									]
@@ -279,7 +230,7 @@
 									},
 									"p_batchid": {
 										"value": {
-											"value": "@activity('Overalllookup').output.firstrow.batchid",
+											"value": "@activity('Lookup1').output.firstRow.batchid",
 											"type": "Expression"
 										},
 										"type": "Int16"
@@ -294,14 +245,14 @@
 									},
 									"p_errorid": {
 										"value": {
-											"value": "@activity('Overalllookup').output.errorid",
+											"value": "@activity('Lookup1').output.errorid",
 											"type": "Expression"
 										},
 										"type": "Int16"
 									},
 									"p_errordesc": {
 										"value": {
-											"value": "@activity('Overalllookup').output.errordesc",
+											"value": "@activity('Lookup1').output.errordesc",
 											"type": "Expression"
 										},
 										"type": "String"
@@ -322,7 +273,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2023-12-19T10:34:40Z"
+		"lastPublishTime": "2023-12-20T04:54:17Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

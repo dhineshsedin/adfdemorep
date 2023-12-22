@@ -1,0 +1,167 @@
+{
+	"name": "ds_stg_wms_put_exec_item_dtl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ControlDetail",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "wms_pway_loc_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_exec_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_exec_ou",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "wms_pway_exec_lineno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "wms_pway_po_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_po_sr_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "wms_pway_uid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_item",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_zone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_rqs_conformation",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "wms_pway_allocated_qty",
+				"type": "decimal",
+				"precision": 28,
+				"scale": 8
+			},
+			{
+				"name": "wms_pway_allocated_bin",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_actual_bin",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_actual_bin_qty",
+				"type": "decimal",
+				"precision": 28,
+				"scale": 8
+			},
+			{
+				"name": "wms_pway_gr_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_gr_lineno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "wms_pway_gr_lot_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_su_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_su_serial_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_su",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_from_staging_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_supp_batch_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_thu_serial_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_target_thu_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_cross_dock",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "wms_pway_actual_staging",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_allocated_staging",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_target_thu_serial_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_stock_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_staging",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_su2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_pway_su_serial_no2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_put_su1_conv_flg",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wms_put_su2_conv_flg",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "stg",
+			"table": "stg_wms_put_exec_item_dtl"
+		}
+	}
+}

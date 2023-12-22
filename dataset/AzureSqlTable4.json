@@ -1,0 +1,293 @@
+{
+	"name": "AzureSqlTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "gr_itm_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_itm_dtl_loc_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_itm_dtl_itm_hdr_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_itm_dtl_uom_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_itm_dtl_thu_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_itm_dtl_stg_mas_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_loc_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_exec_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_exec_ou",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gr_lineno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gr_po_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_po_sno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_item",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_item_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "gr_lot_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_acpt_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "gr_rej_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "gr_storage_unit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_mas_uom",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_su_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "gr_uid_sno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_manu_date",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_exp_date",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_exe_asn_line_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gr_exe_wh_bat_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_exe_supp_bat_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_asn_srl_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_asn_uid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_asn_cust_sl_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_asn_ref_doc_no1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_asn_consignee",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_asn_outboundorder_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "gr_asn_bestbeforedate",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_asn_remarks",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_plan_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_execution_date",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_reasoncode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_cross_dock",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_thu_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_thu_sno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_stag_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_stock_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_inv_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_product_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_coo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_item_attribute1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_item_attribute2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_item_attribute3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_item_in_stage",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_item_to_stage",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_pal_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_item_hht_save_flag",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_updated_from",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_last_updated_by",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_item_attribute7",
+				"type": "nvarchar"
+			},
+			{
+				"name": "etlactiveind",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "etljobname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "envsourcecd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "datasourcecd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "etlcreatedatetime",
+				"type": "datetime2",
+				"scale": 3
+			},
+			{
+				"name": "etlupdatedatetime",
+				"type": "datetime2",
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dwh",
+			"table": "dwh.f_goodsreceiptdetails"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
