@@ -125,7 +125,7 @@
 				}
 			},
 			{
-				"name": "DataFlow",
+				"name": "DataFlows",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
