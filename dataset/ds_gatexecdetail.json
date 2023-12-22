@@ -1,0 +1,222 @@
+{
+	"name": "ds_gatexecdetail",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlazure_demo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "gate_exec_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gate_exec_dtl_loc_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gate_exec_dtl_veh_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gate_exec_dtl_eqp_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gate_exec_dtl_emp_hdr_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gate_loc_code",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_pln_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_pln_ou",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gate_exec_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_exec_ou",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gate_exec_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "gate_exec_status",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_exec_gateno",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_purpose",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_flag",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_actual_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "gate_ser_provider",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_person",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_veh_type",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_vehicle_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_equip_type",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_equip_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_ref_doc_typ1",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_ref_doc_no1",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_ref_doc_typ2",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_ref_doc_no2",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_ref_doc_typ3",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_ref_doc_no3",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_instructions",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_employee",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_created_by",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_created_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "gate_timestamp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gate_userdefined1",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_gatein_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_customer_name",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_vendor_name",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_from",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_to",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_noofunits",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "etlactiveind",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "etljobname",
+				"type": "varchar"
+			},
+			{
+				"name": "envsourcecd",
+				"type": "varchar"
+			},
+			{
+				"name": "datasourcecd",
+				"type": "varchar"
+			},
+			{
+				"name": "etlcreatedatetime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "etlupdatedatetime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dwh",
+			"table": "f_gateexecdetail"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

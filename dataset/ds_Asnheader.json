@@ -1,0 +1,356 @@
+{
+	"name": "ds_Asnheader",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlazure_demo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "asn_hr_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_loc_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_date_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_cust_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_supp_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_ou",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "asn_location",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_prefdoc_type",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_prefdoc_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_prefdoc_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "asn_date",
+				"type": "date"
+			},
+			{
+				"name": "asn_status",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_operation_status",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_ib_order",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_ship_frm",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_ship_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "asn_dlv_loc",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_dlv_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "asn_sup_asn_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_sup_asn_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "asn_sent_by",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_rem",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_ref_typ",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_ref_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_ref_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "asn_shp_carrier",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_mode",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_vh_typ",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_vh_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_eqp_typ",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_eqp_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_grs_wt",
+				"type": "decimal",
+				"precision": 13,
+				"scale": 2
+			},
+			{
+				"name": "asn_shp_nt_wt",
+				"type": "decimal",
+				"precision": 13,
+				"scale": 2
+			},
+			{
+				"name": "asn_shp_wt_uom",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_vol",
+				"type": "decimal",
+				"precision": 13,
+				"scale": 2
+			},
+			{
+				"name": "asn_shp_vol_uom",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_pallt",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "asn_shp_rem",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_cnt_typ",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_cnt_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_cnt_qtyp",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_cnt_qsts",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_timestamp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "asn_usrdf1",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_usrdf2",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_usrdf3",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_createdby",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_created_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "asn_modifiedby",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_modified_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "asn_gen_frm",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_release_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "asn_release_number",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_block_stage",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_amendno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "asn_cust_code",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_supp_code",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_quaran_bil_status",
+				"type": "varchar"
+			},
+			{
+				"name": "dock_no",
+				"type": "varchar"
+			},
+			{
+				"name": "total_value",
+				"type": "decimal",
+				"precision": 13,
+				"scale": 2
+			},
+			{
+				"name": "asn_gate_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_type",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_wchboinv_bil_status",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_adfepasn_bil_status",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_reason_code",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_whimchpd_sell_bil_status",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_wichbain_sell_bil_status",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_stpcgthu_bil_status",
+				"type": "varchar"
+			},
+			{
+				"name": "etlactiveind",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "etljobname",
+				"type": "varchar"
+			},
+			{
+				"name": "envsourcecd",
+				"type": "varchar"
+			},
+			{
+				"name": "datasourcecd",
+				"type": "varchar"
+			},
+			{
+				"name": "etlcreatedatetime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "etlupdatedatetime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dwh",
+			"table": "f_asnheader"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
