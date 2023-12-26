@@ -1,0 +1,6 @@
+{
+	"name": "Postgres",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
