@@ -1,0 +1,31 @@
+{
+	"name": "DS_destination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ControlDetail",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "StudentID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Course",
+				"type": "varchar"
+			},
+			{
+				"name": "Marks",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "",
+			"table": ""
+		}
+	}
+}
