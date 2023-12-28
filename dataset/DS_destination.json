@@ -24,8 +24,8 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "",
-			"table": ""
+			"schema": "stg",
+			"table": "StudentInfo"
 		}
 	}
 }
