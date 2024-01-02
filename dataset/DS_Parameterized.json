@@ -39,7 +39,7 @@
 			"username": {
 				"type": "string"
 			},
-			"password": {
+			"Password": {
 				"type": "string"
 			}
 		},
