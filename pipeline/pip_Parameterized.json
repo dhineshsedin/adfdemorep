@@ -21,6 +21,10 @@
 					{
 						"name": "Destination",
 						"value": "@{pipeline().parameters.pip_schemaName}.@{pipeline().parameters.pip_DestinationTableName}"
+					},
+					{
+						"name": "UserPerformed",
+						"value": "Ramamoorthy"
 					}
 				],
 				"typeProperties": {
