@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "ds_controltable",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~>  ds_controltable",
+					"dataset": {
+						"referenceName": "ds_controltable",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared ds_controltable = let AdfDoc = Sql.Database(\"dk123.database.windows.net\", \"demo\", [CreateNavigationProperties = false]), InputTable = AdfDoc{[Schema=\"ods\",Item=\"controldetail\"]}[Data] in InputTable;\r\nshared UserQuery = let Source = #\"ds_controltable\" in Source;\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}
