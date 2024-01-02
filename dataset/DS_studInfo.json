@@ -1,0 +1,31 @@
+{
+	"name": "DS_studInfo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Ram",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "StudentID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Course",
+				"type": "varchar"
+			},
+			{
+				"name": "Marks",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "",
+			"table": ""
+		}
+	}
+}
