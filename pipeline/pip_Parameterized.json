@@ -13,14 +13,37 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "@{pipeline().parameters.pip_schemaName}.@{pipeline().parameters.pip_TableName}"
+					},
+					{
+						"name": "Destination",
+						"value": "@{pipeline().parameters.pip_schemaName}.@{pipeline().parameters.pip_DestinationTableName}"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
@@ -46,6 +69,42 @@
 							"username": {
 								"value": "@pipeline().parameters.pip_username",
 								"type": "Expression"
+							},
+							"Password": {
+								"value": "@pipeline().parameters.pip_password",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Parameterized",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@pipeline().parameters.pip_DestinationTableName",
+								"type": "Expression"
+							},
+							"SchemaName": {
+								"value": "@pipeline().parameters.pip_schemaName",
+								"type": "Expression"
+							},
+							"Servername": {
+								"value": "@pipeline().parameters.pip_Servername",
+								"type": "Expression"
+							},
+							"DBname": {
+								"value": "@pipeline().parameters.pip_DBName",
+								"type": "Expression"
+							},
+							"username": {
+								"value": "@pipeline().parameters.pip_username",
+								"type": "Expression"
+							},
+							"Password": {
+								"value": "@pipeline().parameters.pip_password",
+								"type": "Expression"
 							}
 						}
 					}
@@ -69,6 +128,9 @@
 				"type": "string"
 			},
 			"pip_TableName": {
+				"type": "string"
+			},
+			"pip_DestinationTableName": {
 				"type": "string"
 			}
 		},
