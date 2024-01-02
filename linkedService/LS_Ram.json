@@ -1,0 +1,17 @@
+{
+	"name": "LS_Ram",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=RFL258;initial catalog=PBIDB",
+			"userName": "RFL258\\ram",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkODliNTU4Ni0xODMyLTRiMGYtYjU2ZS04MWZkZWRjNDY3ZDciLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
