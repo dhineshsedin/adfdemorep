@@ -19,7 +19,7 @@
 						"type": "SqlServerSource",
 						"additionalColumns": [
 							{
-								"name": "FlagValue",
+								"name": "MarkUpdate",
 								"value": "100"
 							}
 						],
