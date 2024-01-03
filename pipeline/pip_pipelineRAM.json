@@ -20,10 +20,10 @@
 						"additionalColumns": [
 							{
 								"name": "CourseUpdate",
-								"value": "Computer Science"
+								"value": "Physics"
 							}
 						],
-						"sqlReaderQuery": "Select * from studentinfo where studentid = '2000'",
+						"sqlReaderQuery": "Select * from studentinfo where studentid = '2001'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -46,13 +46,37 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "MarkUpdate",
+									"name": "StudentID",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "StudentID",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "CourseUpdate",
 									"type": "String"
 								},
 								"sink": {
 									"name": "Course",
 									"type": "String",
 									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Marks",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Marks",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							}
 						],
