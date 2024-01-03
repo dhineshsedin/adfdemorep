@@ -24,6 +24,16 @@
 						"type": "DatasetReference"
 					},
 					"name": "source3"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_StudentInfo",
+						"type": "DatasetReference"
+					},
+					"name": "source4"
+				},
+				{
+					"name": "source5"
 				}
 			],
 			"sinks": [
@@ -227,6 +237,17 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source3",
+				"source(output(",
+				"          StudentID as integer,",
+				"          Course as string,",
+				"          Marks as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source4",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source5",
 				"source1, source2 join(asn_loc_key == gr_itm_dtl_loc_key",
 				"     && asn_dtl_itm_hdr_key == gr_itm_dtl_itm_hdr_key",
 				"     && asn_prefdoc_no == gr_po_no,",

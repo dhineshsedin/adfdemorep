@@ -17,12 +17,25 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
+						"additionalColumns": [
+							{
+								"name": "FlagValue",
+								"value": "100"
+							}
+						],
+						"sqlReaderQuery": "Select Marks from studentinfo where studentid = '2000'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"StudentID"
+							]
+						},
 						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
@@ -30,6 +43,19 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "FlagValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Marks",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
