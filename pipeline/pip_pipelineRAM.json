@@ -19,11 +19,11 @@
 						"type": "SqlServerSource",
 						"additionalColumns": [
 							{
-								"name": "MarkUpdate",
-								"value": "100"
+								"name": "CourseUpdate",
+								"value": "Computer Science"
 							}
 						],
-						"sqlReaderQuery": "Select Marks from studentinfo where studentid = '2000'",
+						"sqlReaderQuery": "Select * from studentinfo where studentid = '2000'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -46,13 +46,13 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "FlagValue",
+									"name": "MarkUpdate",
 									"type": "String"
 								},
 								"sink": {
-									"name": "Marks",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "Course",
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							}
 						],
