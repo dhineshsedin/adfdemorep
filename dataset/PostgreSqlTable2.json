@@ -1,0 +1,17 @@
+{
+	"name": "PostgreSqlTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PostgreSql1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "PostgreSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "click",
+			"table": "f_asn_y2022"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

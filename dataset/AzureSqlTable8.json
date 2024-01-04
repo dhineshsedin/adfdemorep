@@ -1,0 +1,317 @@
+{
+	"name": "AzureSqlTable8",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "asn_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_hr_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gate_exec_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_loc_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_date_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_cust_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_dtl_itm_hdr_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gate_exec_dtl_veh_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_ou",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "asn_location",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_lineno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "asn_prefdoc_type",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_prefdoc_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_prefdoc_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "asn_date",
+				"type": "date"
+			},
+			{
+				"name": "asn_status",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_operation_status",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_ib_order",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_ship_frm",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_dlv_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "asn_sup_asn_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_sup_asn_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "asn_sent_by",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_ship_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "asn_rem",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_ref_typ",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_ref_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_ref_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "asn_shp_carrier",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_mode",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_shp_rem",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_cust_code",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_type",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_reason_code",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_gate_no",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_created_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "asn_modified_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "gate_actual_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "gate_ser_provider",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_veh_type",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_vehicle_no",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_employee",
+				"type": "varchar"
+			},
+			{
+				"name": "gate_created_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "asn_line_status",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_itm_code",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "asn_rec_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "asn_acc_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "asn_rej_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "asn_order_uom",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_master_uom_qty",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 2
+			},
+			{
+				"name": "etlcreatedatetime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "etlupdatedatetime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "createdatetime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "updatedatetime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "asn_itm_itemgroup",
+				"type": "varchar"
+			},
+			{
+				"name": "asn_itm_class",
+				"type": "varchar"
+			},
+			{
+				"name": "activeindicator",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "asn_cutofftime",
+				"type": "time",
+				"scale": 7
+			},
+			{
+				"name": "asn_qualifieddate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "asn_qualifieddatekey",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "asn_openingtime",
+				"type": "time",
+				"scale": 7
+			},
+			{
+				"name": "sourcename",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "click",
+			"table": "f_asn"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

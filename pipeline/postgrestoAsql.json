@@ -1,10 +1,9 @@
 {
-	"name": "pip_PerformanceChk_SPBased",
+	"name": "postgrestoAsql",
 	"properties": {
-		"description": "pip_PerformanceChk_SPBased approach",
 		"activities": [
 			{
-				"name": "ControlTable",
+				"name": "LkupAsql",
 				"type": "Lookup",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
@@ -20,12 +19,11 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from ods.controldetail (NOLOCK) where isreadyforexecution = 1 and isapplicable = 1\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "AzureSqlTable10",
+						"referenceName": "Azsqlpercheck",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -38,7 +36,7 @@
 				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
-						"activity": "ControlTable",
+						"activity": "LkupAsql",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -47,12 +45,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('ControlTable').output",
+						"value": "@activity('LkupAsql').output.value",
 						"type": "Expression"
 					},
 					"activities": [
 						{
-							"name": "SRCtoDWH",
+							"name": "perfchk_copy1",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -65,16 +63,15 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "PostgreSqlSource",
-									"query": {
-										"value": "@item().sourcequery",
-										"type": "Expression"
-									}
+									"type": "PostgreSqlSource"
 								},
 								"sink": {
 									"type": "AzureSqlSink",
-									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": true,
+									"writeBehavior": "upsert",
+									"upsertSettings": {
+										"useTempDB": false
+									},
+									"sqlWriterUseTableLock": false,
 									"disableMetricsCollection": false
 								},
 								"enableStaging": false,
@@ -93,11 +90,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"schemaname": {
-											"value": "@item().sourceschema",
+											"value": "@item().schemaname",
 											"type": "Expression"
 										},
 										"tablename": {
-											"value": "@item().sourceobject",
+											"value": "@item().tablename",
 											"type": "Expression"
 										}
 									}
@@ -105,15 +102,15 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "ds_dwh",
+									"referenceName": "perfcheck",
 									"type": "DatasetReference",
 									"parameters": {
-										"targetschemaname": {
-											"value": "@item().targetschemaname",
+										"schemaname": {
+											"value": "@item().schemaname",
 											"type": "Expression"
 										},
-										"targetobject": {
-											"value": "@item().targetobject",
+										"tablename": {
+											"value": "@item().tablename",
 											"type": "Expression"
 										}
 									}
@@ -124,8 +121,8 @@
 				}
 			},
 			{
-				"name": "SP CALL",
-				"type": "SqlServerStoredProcedure",
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
 						"activity": "ForEach1",
@@ -143,16 +140,20 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[DWH].[usp_f_grn]"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase2",
-					"type": "LinkedServiceReference"
+					"dataflow": {
+						"referenceName": "chkperfmnce",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 272,
+						"computeType": "MemoryOptimized"
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2023-12-26T12:06:51Z"
+		"lastPublishTime": "2024-01-02T07:02:03Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

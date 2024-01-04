@@ -1,15 +1,15 @@
 {
-	"name": "ds_dwh",
+	"name": "perfcheck",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase2",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"targetschemaname": {
+			"schemaname": {
 				"type": "string"
 			},
-			"targetobject": {
+			"tablename": {
 				"type": "string"
 			}
 		},
@@ -18,11 +18,11 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": {
-				"value": "@dataset().targetschemaname",
+				"value": "@dataset().schemaname",
 				"type": "Expression"
 			},
 			"table": {
-				"value": "@dataset().targetobject",
+				"value": "@dataset().tablename",
 				"type": "Expression"
 			}
 		}

@@ -1,0 +1,175 @@
+{
+	"name": "AzureSqlTable9",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "gr_dtl_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_loc_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_emp_hdr_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_date_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_stg_mas_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gr_loc_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_exec_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_exec_ou",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gr_pln_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_pln_ou",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gr_pln_date",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_po_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_emp",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_start_date",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_end_date",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_exec_status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_created_by",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_created_date",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_modified_by",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_modified_date",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_timestamp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gr_asn_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_staging_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_exec_date",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "gr_build_complete",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_notype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_ref_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gr_gen_from",
+				"type": "nvarchar"
+			},
+			{
+				"name": "etlactiveind",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "etljobname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "envsourcecd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "datasourcecd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "etlcreatedatetime",
+				"type": "datetime2",
+				"scale": 3
+			},
+			{
+				"name": "etlupdatedatetime",
+				"type": "datetime2",
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dwh",
+			"table": "f_goodsreceiptdetails"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "perfmcechksrce2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dwh",
+			"table": "f_goodsreceiptdetails"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

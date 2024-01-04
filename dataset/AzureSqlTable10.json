@@ -1,8 +1,8 @@
 {
-	"name": "DS_ControlDetail",
+	"name": "AzureSqlTable10",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase2",
+			"referenceName": "AzureSqllnksersrctostg",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -155,7 +155,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "ODS",
+			"schema": "ods",
 			"table": "controldetail"
 		}
 	},

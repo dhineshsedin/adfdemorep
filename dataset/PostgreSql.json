@@ -1,28 +1,28 @@
 {
-	"name": "ds_dwh",
+	"name": "PostgreSql",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase2",
+			"referenceName": "PostgreSql1",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"targetschemaname": {
+			"schemaname": {
 				"type": "string"
 			},
-			"targetobject": {
+			"tablename": {
 				"type": "string"
 			}
 		},
 		"annotations": [],
-		"type": "AzureSqlTable",
+		"type": "PostgreSqlTable",
 		"schema": [],
 		"typeProperties": {
 			"schema": {
-				"value": "@dataset().targetschemaname",
+				"value": "@dataset().schemaname",
 				"type": "Expression"
 			},
 			"table": {
-				"value": "@dataset().targetobject",
+				"value": "@dataset().tablename",
 				"type": "Expression"
 			}
 		}
