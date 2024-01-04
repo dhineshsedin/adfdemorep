@@ -1,13 +1,5 @@
 {
 	"name": "DemoInstance01",
-	"properties": {
-		"globalParameters": {
-			"Path": {
-				"type": "string",
-				"value": "\\"
-			}
-		}
-	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
