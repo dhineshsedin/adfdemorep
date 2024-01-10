@@ -1,0 +1,42 @@
+{
+	"name": "df_text_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blobstorage_demo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "TEXT.csv",
+				"folderPath": "input",
+				"container": "adfdkdemo"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "po",
+				"type": "String"
+			},
+			{
+				"name": "vendor",
+				"type": "String"
+			},
+			{
+				"name": "apple",
+				"type": "String"
+			},
+			{
+				"name": "mango",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
