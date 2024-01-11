@@ -1,0 +1,17 @@
+{
+	"name": "external data parquet",
+	"properties": {
+		"content": {
+			"query": "drop EXTERNAL TABLE [logdata]\n\ndrop EXTERNAL data source log_datas\n\ndrop DATABASE SCOPED CREDENTIAL sastoken\n\nCREATE DATABASE SCOPED CREDENTIAL sastoken\nWITH IDENTITY='SHARED ACCESS SIGNATURE',\nSECRET='sv=2022-11-02&ss=bfqt&srt=sco&sp=rwlup&se=2024-02-10T16:38:18Z&st=2024-01-11T08:38:18Z&spr=https&sig=GsTGBqPYEyvM8QR8Inv5h588yNo%2BbFDAW7p2xnYIeLM%3D'\n\ncreate EXTERNAL data source log_data_parquet\nwith(LOCATION='https://dkdatalakegen2.blob.core.windows.net/parquet',\n     CREDENTIAL=sastoken)\n\n     CREATE EXTERNAL FILE FORMAT parquetFileFormat\n     WITH (  \n    FORMAT_TYPE = PARQUET,  \n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'  \n)\nDROP EXTERNAL TABLE [logdata_parquet]\nCREATE EXTERNAL TABLE [logdata_parquet]\n(\n    [Correlationid] [varchar](200) NULL,\n\t[Operationname] [varchar](200) NULL,\n\t[Status] [varchar](100) NULL,\n\t[Eventcategory] [varchar](100) NULL,\n\t[Level] [varchar](100) NULL,\n\t[Time] [varchar](100) NULL,\n\t[Subscription] [varchar](200) NULL,\n\t[Eventinitiatedby] [varchar](1000) NULL,\n\t[Resourcetype] [varchar](1000) NULL,\n\t[Resourcegroup] [varchar](1000) NULL,\n    [Resource] [varchar](2000) NULL)\nWITH (\n LOCATION = '/log.parquet',\n    DATA_SOURCE = log_data_parquet,  \n    FILE_FORMAT = parquetFileFormat\n)\n\nSELECT * FROM logdata_parquet\n\nselect [Operationname], COUNT([Operationname]) as operationcount from logdata_parquet\ngroup by operationname\norder by operationcount",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "appdb",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
