@@ -62,22 +62,32 @@
 								"dataflow": {
 									"referenceName": "DF_Dynamic",
 									"type": "DataFlowReference",
+									"parameters": {
+										"DBName": {
+											"value": "'@{item().sourcename}'",
+											"type": "Expression"
+										},
+										"TableNAme": {
+											"value": "'@{item().sourceobject}'",
+											"type": "Expression"
+										}
+									},
 									"datasetParameters": {
 										"sourceTable": {
 											"DbName": {
-												"value": "@item().value.sourcename",
+												"value": "@item().sourcename",
 												"type": "Expression"
 											},
 											"TableNAme": {
-												"value": "@item().value.sourceid",
+												"value": "@item().sourceid",
 												"type": "Expression"
 											}
 										}
 									}
 								},
 								"compute": {
-									"coreCount": 8,
-									"computeType": "General"
+									"coreCount": 32,
+									"computeType": "MemoryOptimized"
 								},
 								"traceLevel": "Fine"
 							}
