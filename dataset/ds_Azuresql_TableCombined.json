@@ -5,20 +5,12 @@
 			"referenceName": "LS_AzureSqlStaging",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"SinkTable": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": {
-				"value": "@dataset().SinkTable",
-				"type": "Expression"
-			}
+			"table": "TableCombined"
 		}
 	}
 }

@@ -84,13 +84,7 @@
 				"outputs": [
 					{
 						"referenceName": "ds_Azuresql_TableCombined",
-						"type": "DatasetReference",
-						"parameters": {
-							"SinkTable": {
-								"value": "@activity('Lookup1').output.firstRow.targetobject",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				]
 			},
@@ -176,13 +170,7 @@
 				"outputs": [
 					{
 						"referenceName": "ds_Azuresql_TableCombined",
-						"type": "DatasetReference",
-						"parameters": {
-							"SinkTable": {
-								"value": "@activity('Lookup1_copy1').output.firstRow.targetobject",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				]
 			}
