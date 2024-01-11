@@ -24,11 +24,12 @@
 					"dataset": {
 						"referenceName": "ds_azure_staging_controltble",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": true
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "Copy Table1 from DB1",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -52,12 +53,136 @@
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "ds_Azuresql_Table1",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@activity('Lookup1').output.firstRow.sourceid",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_Azuresql_TableCombined",
+						"type": "DatasetReference",
+						"parameters": {
+							"SinkTable": {
+								"value": "@activity('Lookup1').output.firstRow.targetobject",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Lookup1_copy1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "Select * from controldetail where sourcename = 'DB2'",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_azure_staging_controltble",
 						"type": "DatasetReference"
+					},
+					"firstRowOnly": true
+				}
+			},
+			{
+				"name": "Copy Table2 from DB2",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Lookup1_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_AzureSqlTable2",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableNAme": {
+								"value": "@activity('Lookup1_copy1').output.firstRow.sourceid",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_Azuresql_TableCombined",
+						"type": "DatasetReference",
+						"parameters": {
+							"SinkTable": {
+								"value": "@activity('Lookup1_copy1').output.firstRow.targetobject",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
