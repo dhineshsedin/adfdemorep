@@ -1,0 +1,17 @@
+{
+	"name": "ded sql table copy script",
+	"properties": {
+		"content": {
+			"query": "create TABLE [pool_logdata]\n(\n    [Correlation id] [varchar](200) NULL,\n\t[Operation name] [varchar](200) NULL,\n\t[Status] [varchar](100) NULL,\n\t[Event category] [varchar](100) NULL,\n\t[Level] [varchar](100) NULL,\n\t[Time] [varchar](100)  NULL,\n\t[Subscription] [varchar](200) NULL,\n\t[Event initiated by] [varchar](1000) NULL,\n\t[Resource type] [varchar](1000) NULL,\n\t[Resource group] [varchar](1000) NULL,\n    [Resource] [varchar](2000) NULL\n)\nCOPY INTO [pool_logdata] FROM 'https://dkdatalakegen2.blob.core.windows.net/csv/logcsv.csv'\nWITH(\n    FILE_TYPE='CSV',\n    CREDENTIAL=(IDENTITY='Storage Account Key',SECRET='TNRnT3KEWaeJ8QjGXPx53/7I25tCuAPLmywd02vwIqoUBVJ8cKwYTC9quwgbAJcMQJFHuPzXdfIE+AStZ/wgVw=='),\n    FIRSTROW=2)",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dkdedsqlpool",
+				"poolName": "dkdedsqlpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
