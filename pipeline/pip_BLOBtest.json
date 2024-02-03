@@ -28,7 +28,7 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"fileListPath": "realtimeinput/Idvalue.csv",
+							"recursive": true,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
