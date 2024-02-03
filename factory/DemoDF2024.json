@@ -1,0 +1,9 @@
+{
+	"name": "DemoDF2024",
+	"properties": {
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "true"
+		}
+	},
+	"location": "centralindia"
+}
