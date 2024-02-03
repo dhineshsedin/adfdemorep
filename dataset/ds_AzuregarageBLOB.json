@@ -1,0 +1,16 @@
+{
+	"name": "ds_AzuregarageBLOB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzuregarageCSV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "idvalue"
+		}
+	}
+}
